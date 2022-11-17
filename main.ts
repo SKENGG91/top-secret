@@ -1,10 +1,66 @@
-input.onSound(DetectedSound.Loud, function () {
-    basic.showIcon(IconNames.Heart)
-    music.playMelody("C5 C5 B B A A G F ", 120)
-    music.playMelody("C5 B F A C5 B F C ", 248)
+radio.onReceivedNumber(function (receivedNumber) {
+    radio.sendNumber(receivedNumber)
 })
-basic.forever(function () {
-    if (input.logoIsPressed()) {
-        basic.showString("Hello!")
+input.onButtonPressed(Button.A, function () {
+    let HAND2 = 0
+    if (HAND2 == 0) {
+        basic.showLeds(`
+            . # # . .
+            # # # # .
+            # # # # .
+            . # # . .
+            . . . . .
+            `)
+    }
+    if (HAND2 == 1) {
+        basic.showLeds(`
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            `)
+    }
+    if (HAND2 == 2) {
+        basic.showLeds(`
+            # # . . #
+            # # . # .
+            . . # . .
+            # # . # .
+            # # . . #
+            `)
     }
 })
+input.onGesture(Gesture.Shake, function () {
+    let HAND = 0
+    basic.showString("" + (randint(0, 2)))
+    if (HAND == 0) {
+        basic.showLeds(`
+            . # # . .
+            # # # # .
+            # # # # .
+            . # # . .
+            . . . . .
+            `)
+    }
+    if (HAND == 1) {
+        basic.showLeds(`
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            `)
+    }
+    if (HAND == 2) {
+        basic.showLeds(`
+            # # . . #
+            # # . # .
+            . . # . .
+            # # . # .
+            # # . . #
+            `)
+    }
+    radio.sendNumber(HAND)
+})
+radio.setGroup(20)
